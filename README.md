@@ -1,3 +1,4 @@
+Proyecto inicializado con React 19 + Vite.
 # FaltaUno
 
 FaltaUno es una app web en React con experiencia tipo Tinder para descubrir eventos deportivos y unirte haciendo swipe.
