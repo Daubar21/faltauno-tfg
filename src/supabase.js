@@ -1,3 +1,4 @@
+// Configuracion del cliente Supabase
 // Configuración del cliente Supabase
 // ARCHIVO LEGACY — no se utiliza. El cliente activo está en src/lib/supabase.js
 import { createClient } from '@supabase/supabase-js'
