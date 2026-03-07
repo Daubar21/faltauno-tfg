@@ -1,4 +1,5 @@
 -- Esquema principal: tablas sports, profiles, events, event_participants
+-- Esquema principal: tablas sports, profiles, events, event_participants
 -- ============================================================
 -- FaltaUno - Schema completo de Supabase
 -- TFG - DAWE 2º
