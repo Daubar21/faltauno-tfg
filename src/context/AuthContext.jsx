@@ -1,3 +1,4 @@
+// Contexto de autenticacion con Supabase Auth
 // Contexto de autenticación con Supabase Auth
 // Contexto de autenticación — proporciona la sesión del usuario a toda la app.
 // Cualquier componente puede llamar a useAuth() para obtener session, isAdmin,
