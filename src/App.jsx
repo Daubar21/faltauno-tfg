@@ -1,4 +1,5 @@
 // Rutas protegidas y estructura principal de la SPA
+// Rutas protegidas y estructura principal de la SPA
 // Componente raíz de la aplicación.
 // Decide qué pantalla mostrar según el estado de autenticación:
 //   - Sin sesión → pantalla de login/registro (AuthPage)
