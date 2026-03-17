@@ -1,3 +1,4 @@
+// Servicio de comunicacion con la tabla events de Supabase
 // Servicio de comunicación con la tabla events de Supabase
 // Servicio de eventos — todas las operaciones con la tabla events y event_participants.
 // Separa la lógica de acceso a Supabase de los componentes React.
