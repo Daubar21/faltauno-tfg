@@ -1,3 +1,4 @@
+// Pagina principal de swipe de eventos deportivos
 // Página principal de swipe de eventos deportivos
 // Pantalla principal de la aplicación — orquesta todos los hooks y paneles.
 // Carga los eventos, gestiona el estado de los paneles (filtros, perfil, mapa, etc.)
