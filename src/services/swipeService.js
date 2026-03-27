@@ -1,4 +1,5 @@
 // Servicio para registrar swipes en swipe_history
+// Servicio para registrar swipes en swipe_history
 // Servicio de swipes — registra y recupera el historial de deslizamientos del usuario.
 // Se usa para no volver a mostrar eventos que el usuario ya ha visto.
 import { supabase } from '../lib/supabase'
