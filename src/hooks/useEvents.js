@@ -1,4 +1,5 @@
 // Hook para cargar y filtrar eventos desde Supabase
+// Hook para cargar y filtrar eventos desde Supabase
 // Hook que carga y gestiona la lista de eventos disponibles para hacer swipe.
 // También lleva el registro de los eventos que el usuario ya ha visto (swipedIds)
 // para no volver a mostrarlos, y permite actualizar el contador de participantes.
