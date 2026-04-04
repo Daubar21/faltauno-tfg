@@ -1,4 +1,5 @@
 // Hook de geolocalizacion con fallback a Madrid
+// Hook de geolocalizacion con fallback a Madrid
 // Hook que obtiene la ubicación GPS del usuario al montar el componente.
 // Mientras espera la respuesta del navegador, status es 'requesting' y se
 // muestran coordenadas de Madrid como valor inicial.
