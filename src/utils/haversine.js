@@ -1,4 +1,5 @@
 // Utilidades: formula de Haversine y formateo de fechas
+// Utilidades: formula de Haversine y formateo de fechas
 // Fórmula de Haversine — calcula la distancia en kilómetros entre dos puntos
 // geográficos dados en latitud/longitud. Se usa para mostrar "a X km de ti"
 // en cada tarjeta de evento.
