@@ -1,21 +1,73 @@
-import { FiCalendar, FiMapPin } from 'react-icons/fi'
+import { useState } from 'react'
+import { FiCalendar, FiMapPin, FiX } from 'react-icons/fi'
 import { sportIcons } from '../constants/sports'
+
+const DAY_FILTERS = [
+  { label: 'Todos', value: null },
+  { label: 'Hoy', value: 0 },
+  { label: '3 días', value: 3 },
+  { label: '1 semana', value: 7 },
+  { label: '2 semanas', value: 14 },
+  { label: '1 mes', value: 30 },
+]
+
+function daysFromToday(eventDate) {
+  if (!eventDate) return Infinity
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+  const d = new Date(eventDate + 'T00:00:00')
+  return Math.floor((d - today) / (1000 * 60 * 60 * 24))
+}
 
 function openGoogleMaps(event) {
   const url = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${event.lat},${event.lng}`)}`
   window.open(url, '_blank', 'noopener,noreferrer')
 }
 
-export function JoinedPanel({ joinedEvents }) {
+export function JoinedPanel({ joinedEvents, onCancel }) {
+  const [dayFilter, setDayFilter] = useState(null)
+  const [cancelling, setCancelling] = useState(null)
+
+  const visible =
+    dayFilter === null
+      ? joinedEvents
+      : joinedEvents.filter((e) => {
+          const diff = daysFromToday(e.eventDate)
+          return dayFilter === 0 ? diff === 0 : diff >= 0 && diff <= dayFilter
+        })
+
+  async function handleCancel(eventId) {
+    setCancelling(eventId)
+    await onCancel(eventId)
+    setCancelling(null)
+  }
+
   return (
     <section className="floating-panel joined-panel" aria-label="Mis partidos">
       <h2>Mis partidos</h2>
 
-      {joinedEvents.length === 0 ? (
-        <p className="joined-empty">Todavía no te has apuntado a ningún evento.</p>
+      <div className="day-filter-row">
+        {DAY_FILTERS.map(({ label, value }) => (
+          <button
+            key={label}
+            type="button"
+            className={`day-chip ${dayFilter === value ? 'active' : ''}`}
+            onClick={() => setDayFilter(value)}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+
+      {visible.length === 0 ? (
+        <p className="joined-empty">
+          {joinedEvents.length === 0
+            ? 'Todavía no te has apuntado a ningún evento.'
+            : 'No hay eventos en este período.'}
+        </p>
       ) : (
         <ul className="joined-events">
-          {joinedEvents.map((event) => {
+          {visible.map((event) => {
             const SportIcon = sportIcons[event.sport] ?? sportIcons['Futbol 7']
             const spotsLeft = event.totalPlaces - event.currentParticipants
             const isComplete = event.status === 'full'
@@ -78,17 +130,27 @@ export function JoinedPanel({ joinedEvents }) {
                       className="mini-action"
                       onClick={() => openGoogleMaps(event)}
                     >
-                      Como llegar
+                      Cómo llegar
                     </button>
                     {spotsLeft > 0 && spotsLeft <= 2 && (
                       <p className="low-spots-alert">Pocas plazas</p>
                     )}
                   </div>
 
-                  {isCancelled && (
+                  {isCancelled ? (
                     <div className="cancelled-notice">
                       <p>⚠️ Este evento ha sido cancelado</p>
                     </div>
+                  ) : (
+                    <button
+                      type="button"
+                      className="cancel-participation-btn"
+                      onClick={() => handleCancel(event.id)}
+                      disabled={cancelling === event.id}
+                    >
+                      <FiX aria-hidden="true" />
+                      {cancelling === event.id ? 'Cancelando…' : 'Cancelar participación'}
+                    </button>
                   )}
                 </div>
               </li>
