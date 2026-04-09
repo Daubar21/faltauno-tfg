@@ -20,3 +20,11 @@ export function joinEvent(userId, eventId) {
     .from('event_participants')
     .upsert({ event_id: eventId, user_id: userId, status: 'active' })
 }
+
+export function cancelParticipation(userId, eventId) {
+  return supabase
+    .from('event_participants')
+    .update({ status: 'cancelled' })
+    .eq('user_id', userId)
+    .eq('event_id', eventId)
+}

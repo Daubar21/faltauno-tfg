@@ -13,6 +13,7 @@ export function mapDbEvent(row, userLat = MADRID_LAT, userLng = MADRID_LNG) {
     sport: row.sports?.name ?? '',
     sportBasePrice: Number(row.sports?.base_price) || 0,
     title: row.title,
+    eventDate: row.event_date ?? '',
     date: formatEventDate(row.event_date, row.event_time),
     city: row.city,
     address: row.address,
