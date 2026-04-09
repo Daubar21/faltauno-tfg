@@ -48,11 +48,15 @@ export function SwipePage() {
     prefsHook.prefs.selectedSports.join(),
     prefsHook.prefs.selectedLevels.join(),
     prefsHook.prefs.selectedGenders.join(),
+    prefsHook.prefs.maxDays,
   ])
 
   const { prefs } = prefsHook
 
   const filteredEvents = useMemo(() => {
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+
     return eventsHook.events.filter((event) => {
       if (eventsHook.swipedIds.has(event.id)) return false
       if (prefs.userAge < event.minAge || prefs.userAge > event.maxAge) return false
@@ -61,6 +65,11 @@ export function SwipePage() {
       if (prefs.selectedSports.length > 0 && !prefs.selectedSports.includes(event.sport)) return false
       if (prefs.selectedLevels.length > 0 && !prefs.selectedLevels.includes(event.level)) return false
       if (prefs.selectedGenders.length > 0 && !prefs.selectedGenders.includes(event.gender)) return false
+      if (event.eventDate) {
+        const d = new Date(event.eventDate + 'T00:00:00')
+        const diffDays = Math.floor((d - today) / (1000 * 60 * 60 * 24))
+        if (prefs.maxDays === 0 ? diffDays !== 0 : diffDays > prefs.maxDays) return false
+      }
       return true
     })
   }, [eventsHook.events, eventsHook.swipedIds, prefs])
@@ -120,10 +129,15 @@ export function SwipePage() {
     setShowProfile(false)
   }
 
-  async function handleSaveProfile() {
-    await profileHook.save(userId)
+  async function handleSaveProfile(avatarFile) {
+    await profileHook.save(userId, avatarFile)
     toast.success('Perfil guardado')
     setShowProfile(false)
+  }
+
+  async function handleCancelEvent(eventId) {
+    await joinedHook.cancel(userId, eventId)
+    toast.info('Has cancelado tu participación')
   }
 
   function handleProfileChange(field, value) {
@@ -167,7 +181,10 @@ export function SwipePage() {
           />
         )}
         {showJoined && (
-          <JoinedPanel joinedEvents={joinedHook.joinedEvents} />
+          <JoinedPanel
+            joinedEvents={joinedHook.joinedEvents}
+            onCancel={handleCancelEvent}
+          />
         )}
       </Topbar>
 
