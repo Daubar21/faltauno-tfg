@@ -5,6 +5,7 @@ export const DEFAULT_PREFS = {
   userAge: 27,
   maxDistance: 15,
   maxPrice: 10,
+  maxDays: 30,
   selectedSports: [],
   selectedLevels: [],
   selectedGenders: [],
