@@ -1,5 +1,13 @@
-import { FiAward, FiNavigation, FiUsers } from 'react-icons/fi'
+import { FiAward, FiCalendar, FiNavigation, FiUsers } from 'react-icons/fi'
 import { FILTER_GROUPS, genderIcons, genderOptions, levelIcons, levelOptions } from '../constants/sports'
+
+const DAY_OPTIONS = [
+  { label: 'Hoy', value: 0 },
+  { label: '3 días', value: 3 },
+  { label: '1 semana', value: 7 },
+  { label: '2 semanas', value: 14 },
+  { label: '1 mes', value: 30 },
+]
 
 export function FiltersPanel({ prefs, onPrefChange, onReset }) {
   function toggleGroup(key) {
@@ -71,6 +79,22 @@ export function FiltersPanel({ prefs, onPrefChange, onReset }) {
             </button>
           )
         })}
+      </div>
+
+      <p className="panel-section-title">
+        <FiCalendar aria-hidden="true" /> Días desde hoy
+      </p>
+      <div className="icon-grid compact-grid">
+        {DAY_OPTIONS.map(({ label, value }) => (
+          <button
+            key={value}
+            type="button"
+            className={`icon-choice ${prefs.maxDays === value ? 'active' : ''}`}
+            onClick={() => onPrefChange('maxDays', value)}
+          >
+            <span>{label}</span>
+          </button>
+        ))}
       </div>
 
       <label htmlFor="age">
