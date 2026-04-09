@@ -695,6 +695,60 @@
   font-size: 0.88rem;
 }
 
+/* Chips de filtro de días */
+.day-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.day-chip {
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1.5px solid var(--panel-border);
+  background: transparent;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-700);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.day-chip.active,
+.day-chip:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* Botón cancelar participación */
+.cancel-participation-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  padding: 7px 14px;
+  border-radius: 8px;
+  border: 1.5px solid var(--pass);
+  background: transparent;
+  color: var(--pass);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.cancel-participation-btn:hover:not(:disabled) {
+  background: var(--pass);
+  color: #fff;
+}
+
+.cancel-participation-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
 .main-center {
   min-height: calc(100vh - 100px);
   display: grid;
