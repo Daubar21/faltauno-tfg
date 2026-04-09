@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { fetchJoinedEvents } from '../services/eventsService'
+import { cancelParticipation, fetchJoinedEvents } from '../services/eventsService'
 import { mapDbEvent } from '../utils/mapDbEvent'
 
 export function useJoinedEvents() {
@@ -18,5 +18,10 @@ export function useJoinedEvents() {
     )
   }
 
-  return { joinedEvents, load, add }
+  async function cancel(userId, eventId) {
+    await cancelParticipation(userId, eventId)
+    setJoinedEvents((prev) => prev.filter((e) => e.id !== eventId))
+  }
+
+  return { joinedEvents, load, add, cancel }
 }
