@@ -1,4 +1,5 @@
 // Panel de filtros: deporte, distancia, nivel, precio y genero
+// Panel de filtros: deporte, distancia, nivel, precio y genero
 // Panel de filtros — permite al usuario ajustar deporte, nivel, fechas,
 // distancia, precio y preferencias de notificación.
 // Los cambios se propagan al padre y se guardan en Supabase al cerrar el panel.
