@@ -1,4 +1,5 @@
 // Servicio para persistir preferencias de filtro del usuario
+// Servicio para persistir preferencias de filtro del usuario
 // Servicio de preferencias — guarda y recupera los filtros del usuario en Supabase.
 // Al usar upsert, se crea el registro si no existe y se actualiza si ya existe.
 import { supabase } from '../lib/supabase'

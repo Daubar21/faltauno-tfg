@@ -1,4 +1,5 @@
 // Hook para gestionar preferencias de filtro
+// Hook para gestionar preferencias de filtro
 // Hook que gestiona las preferencias de filtrado del usuario.
 // Se cargan desde Supabase al iniciar la sesión y se guardan al cerrar el panel.
 import { useState } from 'react'
