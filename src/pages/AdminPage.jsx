@@ -1,4 +1,5 @@
 // Panel de administracion: CRUD completo de eventos
+// Panel de administracion: CRUD completo de eventos
 // Panel de administración — accesible solo para usuarios con rol 'admin'.
 // Contiene cuatro pestañas: Resumen (estadísticas), Solicitudes (eventos pendientes),
 // Eventos (CRUD completo) y Usuarios (gestión de roles).
