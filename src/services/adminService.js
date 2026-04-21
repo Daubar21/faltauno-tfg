@@ -1,4 +1,5 @@
 // Servicio de administracion: gestion de eventos y usuarios
+// Servicio de administracion: gestion de eventos y usuarios
 // Servicio de administración — operaciones exclusivas del panel de admin.
 // Incluye estadísticas globales, moderación de eventos y gestión de usuarios.
 import { supabase } from '../lib/supabase'
