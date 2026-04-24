@@ -1,4 +1,5 @@
 // Panel de perfil: nombre, ciudad, bio, edad y avatar
+// Panel de perfil: nombre, ciudad, bio, edad y avatar
 // Panel de perfil — permite al usuario editar sus datos personales (nombre, ciudad,
 // bio, avatar, edad, sexo) y ver su historial de eventos completados agrupados por deporte.
 import { useState } from 'react'

@@ -1,4 +1,5 @@
 // Hook para gestionar el perfil del usuario
+// Hook para gestionar el perfil del usuario
 // Hook que gestiona el perfil del usuario (nombre, ciudad, bio, avatar, etc.).
 // Separa la carga y el guardado de datos para mantener SwipePage más limpio.
 import { useState } from 'react'

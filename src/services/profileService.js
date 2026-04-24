@@ -1,4 +1,5 @@
 // Servicio de perfil de usuario y avatar en Supabase Storage
+// Servicio de perfil de usuario y avatar en Supabase Storage
 // Servicio de perfil — gestiona los datos del usuario en la tabla profiles
 // y la subida de avatares al bucket de Supabase Storage.
 import { supabase } from '../lib/supabase'
