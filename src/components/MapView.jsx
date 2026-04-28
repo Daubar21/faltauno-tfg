@@ -1,4 +1,5 @@
 // Mapa interactivo con Leaflet y marcadores de eventos
+// Mapa interactivo con Leaflet y marcadores de eventos
 // Vista de mapa interactivo (Leaflet) con marcadores de todos los eventos filtrados.
 // Al hacer clic en un marcador se muestra un popup con la info del evento y un botón
 // para unirse directamente desde el mapa.
