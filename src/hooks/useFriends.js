@@ -1,4 +1,5 @@
 // Hook para gestionar amistades y solicitudes
+// Hook para gestionar amistades y solicitudes
 // Hook que gestiona la lista de amigos, solicitudes pendientes y búsqueda de usuarios.
 // Expone las amistades clasificadas en: aceptadas, recibidas y enviadas.
 import { useState } from 'react'

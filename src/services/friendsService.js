@@ -1,4 +1,5 @@
 // Servicio de amistades y sistema social
+// Servicio de amistades y sistema social
 // Servicio social — gestiona amistades entre usuarios y consulta
 // los próximos eventos de un amigo para mostrarlos en el panel social.
 import { supabase } from '../lib/supabase'
