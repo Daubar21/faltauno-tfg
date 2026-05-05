@@ -1,4 +1,5 @@
 // Sistema de valoraciones de eventos completados
+// Sistema de valoraciones de eventos completados
 // Servicio de valoraciones — guarda y recupera las puntuaciones que los usuarios
 // dejan en los eventos que han completado. Usa upsert para evitar duplicados.
 import { supabase } from '../lib/supabase'

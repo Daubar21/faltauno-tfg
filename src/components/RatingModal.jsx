@@ -1,4 +1,5 @@
 // Modal de valoracion de eventos completados
+// Modal de valoracion de eventos completados
 // Modal de valoración — aparece cuando un evento ha terminado y el usuario
 // puede puntuar del 1 al 5 y dejar un comentario opcional.
 // Tras guardar la valoración ofrece compartir el resultado por WhatsApp.

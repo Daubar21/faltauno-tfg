@@ -1,4 +1,5 @@
 // Hook para obtener eventos completados por el usuario
+// Hook para obtener eventos completados por el usuario
 // Hook que gestiona el historial de eventos completados y valorados por el usuario.
 // Se usa para mostrar las estadísticas del perfil y calcular la racha semanal.
 import { useState } from 'react'
