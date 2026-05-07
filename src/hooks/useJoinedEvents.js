@@ -1,4 +1,5 @@
 // Hook para obtener eventos a los que se ha unido el usuario
+// Hook para obtener eventos a los que se ha unido el usuario
 // Hook que gestiona los eventos a los que el usuario se ha apuntado.
 // Permite cargarlos desde la BD, añadir uno nuevo al hacer like,
 // cancelar la participación y retirarlos de la lista tras valorarlos.

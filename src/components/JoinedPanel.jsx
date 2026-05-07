@@ -1,4 +1,5 @@
 // Panel Mis Partidos: eventos unidos con estado y fecha
+// Panel Mis Partidos: eventos unidos con estado y fecha
 // Panel de partidos apuntados — muestra los eventos a los que el usuario se ha unido,
 // con filtros por fecha, badges de estado temporal y acciones de cancelar/valorar.
 import { useState } from 'react'
