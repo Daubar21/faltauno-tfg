@@ -1,4 +1,5 @@
 // Panel de amigos: solicitudes, ranking y rachas
+// Panel de amigos: solicitudes, ranking y rachas
 // Panel social — gestiona amigos, solicitudes de amistad, ranking por puntos
 // y búsqueda de otros usuarios de la aplicación.
 import { useEffect, useRef, useState } from 'react'
