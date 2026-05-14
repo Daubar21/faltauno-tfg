@@ -1,4 +1,5 @@
 // Barra de navegacion superior
+// Barra de navegacion superior
 // Barra de navegación superior — contiene los botones de acceso a todos los paneles
 // y el logo de la aplicación. Recibe callbacks del padre (SwipePage) para cada acción.
 import { FiActivity, FiCalendar, FiLogOut, FiMap, FiPlusCircle, FiSliders, FiShield, FiUser, FiUsers } from 'react-icons/fi'
