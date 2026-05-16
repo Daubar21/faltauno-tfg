@@ -1,4 +1,5 @@
 // Panel de propuesta de eventos por usuarios con geocodificacion
+// Panel de propuesta de eventos por usuarios con geocodificacion
 // Panel para que los usuarios propongan sus propios eventos.
 // Los eventos creados por usuarios no-admin quedan en estado 'pending'
 // hasta que un administrador los aprueba desde el panel de administración.
