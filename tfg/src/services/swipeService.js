@@ -1,7 +1,9 @@
+// Servicio de swipes — registra y recupera el historial de deslizamientos del usuario.
+// Se usa para no volver a mostrar eventos que el usuario ya ha visto.
 import { supabase } from '../lib/supabase'
 
 export function fetchSwipeHistory(userId) {
-  return supabase.from('swipe_history').select('event_id').eq('user_id', userId)
+  return supabase.from('swipe_history').select('event_id').eq('user_id', userId).eq('direction', 'like')
 }
 
 export function recordSwipe(userId, eventId, direction) {

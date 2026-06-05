@@ -1,3 +1,5 @@
+// Servicio de perfil — gestiona los datos del usuario en la tabla profiles
+// y la subida de avatares al bucket de Supabase Storage.
 import { supabase } from '../lib/supabase'
 
 export async function uploadAvatar(userId, file) {
@@ -15,10 +17,31 @@ export function fetchProfile(userId) {
   return supabase.from('profiles').select('*').eq('id', userId).single()
 }
 
-export function updateProfile(userId, fields) {
+export async function updateProfile(userId, fields) {
+  const { error } = await supabase
+    .from('profiles')
+    .update({ ...fields, updated_at: new Date().toISOString() })
+    .eq('id', userId)
+  if (error) throw error
+}
+
+export function updateUserStats(userId, completedCount, currentStreak) {
   return supabase
     .from('profiles')
-    .upsert({ id: userId, ...fields, updated_at: new Date().toISOString() })
+    .update({ completed_count: completedCount, current_streak: currentStreak })
+    .eq('id', userId)
+}
+
+export async function getEmailByUsername(username) {
+  const { data } = await supabase.rpc('get_email_by_username', { p_username: username })
+  return data ?? null
+}
+
+export async function isUsernameAvailable(username, excludeUserId = null) {
+  let query = supabase.from('profiles').select('id').eq('username', username)
+  if (excludeUserId) query = query.neq('id', excludeUserId)
+  const { data } = await query.maybeSingle()
+  return data === null
 }
 
 export function fetchFavoriteSports(userId) {

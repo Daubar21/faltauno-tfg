@@ -14,7 +14,8 @@ import {
 import { FiActivity, FiAward, FiTrendingUp } from 'react-icons/fi'
 import { GiTennisRacket } from 'react-icons/gi'
 
-// Map: DB sport name → icon component (used on event cards)
+// Mapa de nombre de deporte (igual que en la BD) → componente de icono
+// Se usa en las tarjetas de eventos y en los paneles de perfil y amigos
 export const sportIcons = {
   'Futbol 7':    FaFutbol,
   'Futbol Sala': FaFutbol,
@@ -29,9 +30,10 @@ export const sportIcons = {
   Ciclismo:      FaBicycle,
 }
 
-// Filter groups shown in the panel.
-// key = value stored in user_preferences.selected_sports
-// sports = DB sport names that belong to this group
+// Grupos de deportes para el panel de filtros.
+// key → valor guardado en user_preferences.selected_sports
+// sports → nombres de deportes de la BD que pertenecen a ese grupo
+// (Fútbol agrupa Futbol 7, Futbol Sala y Futbol 11 para simplificar el filtro)
 export const FILTER_GROUPS = [
   {
     key: 'Futbol',
@@ -71,6 +73,12 @@ export const participantsPool = [
   'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80',
   'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=200&q=80',
   'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80',
+  'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
+  'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=200&q=80',
+  'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=200&q=80',
+  'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=200&q=80',
+  'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=200&q=80',
+  'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=200&q=80',
 ]
 
 export const welcomeImages = [

@@ -1,3 +1,5 @@
+// Hook que controla el índice de la tarjeta activa en el mazo de swipe.
+// advance() pasa a la siguiente tarjeta; reset() vuelve al principio.
 import { useState } from 'react'
 
 export function useSwipe() {

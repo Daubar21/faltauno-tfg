@@ -1,14 +1,15 @@
+// Hook que gestiona las preferencias de filtrado del usuario.
+// Se cargan desde Supabase al iniciar la sesión y se guardan al cerrar el panel.
 import { useState } from 'react'
 import { fetchPreferences, savePreferences } from '../services/preferencesService'
 
+// Valores por defecto usados cuando el usuario no ha guardado preferencias aún
 export const DEFAULT_PREFS = {
-  userAge: 27,
-  maxDistance: 15,
+  maxDistance: 30,
   maxPrice: 10,
   maxDays: 30,
   selectedSports: [],
   selectedLevels: [],
-  selectedGenders: [],
   notifReminders: true,
   notifStatusUpdates: true,
   notifNewEvents: false,
@@ -21,12 +22,11 @@ export function usePreferences() {
     const { data } = await fetchPreferences(userId)
     if (data) {
       setPrefs({
-        userAge: data.user_age ?? 27,
-        maxDistance: data.max_distance_km ?? 15,
+        maxDistance: data.max_distance_km ?? 30,
         maxPrice: Number(data.max_price) || 10,
+        maxDays: data.max_days ?? 30,
         selectedSports: data.selected_sports ?? [],
         selectedLevels: data.selected_levels ?? [],
-        selectedGenders: data.selected_genders ?? [],
         notifReminders: data.notif_reminders ?? true,
         notifStatusUpdates: data.notif_status_updates ?? true,
         notifNewEvents: data.notif_new_events ?? false,
