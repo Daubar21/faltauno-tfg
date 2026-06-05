@@ -3,6 +3,12 @@ import { fetchWaitlistEvents, joinWaitlist, leaveWaitlist } from '../services/ev
 import { mapDbEvent } from '../utils/mapDbEvent'
 import { MADRID_LAT, MADRID_LNG } from '../utils/haversine'
 
+function isEventPast(event) {
+  if (!event.eventDate) return false
+  const time = event.eventTime ? event.eventTime.slice(0, 5) : '00:00'
+  return new Date(`${event.eventDate}T${time}:00`) < new Date()
+}
+
 export function useWaitlist() {
   const [waitlistEvents, setWaitlistEvents] = useState([])
 
@@ -14,6 +20,7 @@ export function useWaitlist() {
           data
             .map((w) => ({ ...mapDbEvent(w.events, userLat, userLng), waitlistEntryId: w.id, waitlistAt: w.created_at }))
             .filter(Boolean)
+            .filter((e) => !isEventPast(e))
         )
       }
     } catch { /* mantener estado actual */ }

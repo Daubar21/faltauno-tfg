@@ -24,23 +24,32 @@ export function AuthProvider({ children }) {
   const [isPasswordRecovery, setIsPasswordRecovery] = useState(false)
 
   useEffect(() => {
-    let timeoutId = setTimeout(() => setLoading(false), 5000)
+    let cancelled = false
+    const timeoutId = setTimeout(() => { if (!cancelled) setLoading(false) }, 5000)
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
+        if (cancelled) return
         clearTimeout(timeoutId)
+
         setSession(session)
+        setLoading(false)   // desbloquea la UI inmediatamente, sin esperar a resolveRole
+
         if (event === 'PASSWORD_RECOVERY') {
           setIsPasswordRecovery(true)
         } else if (event === 'SIGNED_OUT') {
+          setIsAdmin(false)
           setIsPasswordRecovery(false)
+        } else {
+          // SIGNED_IN, TOKEN_REFRESHED, USER_UPDATED — actualiza el rol en segundo plano
+          const admin = await resolveRole(session).catch(() => false)
+          if (!cancelled) setIsAdmin(admin)
         }
-        setIsAdmin(await resolveRole(session).catch(() => false))
-        setLoading(false)
       }
     )
 
     return () => {
+      cancelled = true
       clearTimeout(timeoutId)
       subscription.unsubscribe()
     }

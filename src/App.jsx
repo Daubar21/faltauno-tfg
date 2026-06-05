@@ -130,10 +130,12 @@ export default function App() {
 
   useEffect(() => {
     if (!session) { setNeedsSetup(null); return }
-    fetchProfile(session.user.id).then(({ data }) => {
-      const complete = Boolean(data?.username && data?.city && data?.age && data?.gender)
-      setNeedsSetup(!complete)
-    })
+    fetchProfile(session.user.id)
+      .then(({ data }) => {
+        const complete = Boolean(data?.username && data?.city && data?.age && data?.gender)
+        setNeedsSetup(!complete)
+      })
+      .catch(() => setNeedsSetup(false))
   }, [session])
 
   // Procesa la invitación pendiente en cuanto el usuario está logado y con perfil completo

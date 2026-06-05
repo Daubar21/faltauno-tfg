@@ -57,6 +57,11 @@ export function JoinedPanel({ joinedEvents, waitlistEvents = [], onCancel, onLea
           return dayFilter === 0 ? diff === 0 : diff >= 0 && diff <= dayFilter
         })
 
+  const visibleWaitlist = waitlistEvents.filter((event) => {
+    const timing = getEventTimingStatus(event)
+    return timing !== 'past' && timing !== 'ratable' && timing !== 'cancelled_no_quorum'
+  })
+
   async function handleCancel(eventId) {
     setCancelling(eventId)
     await onCancel(eventId)
@@ -75,7 +80,7 @@ export function JoinedPanel({ joinedEvents, waitlistEvents = [], onCancel, onLea
   return (
     <section className="floating-panel joined-panel" aria-label="Mis partidos">
       <div className="panel-header">
-        <h2>Mis partidos {joinedEvents.length > 0 && `(${joinedEvents.length})`}{waitlistEvents.length > 0 && ` · ${waitlistEvents.length} en espera`}</h2>
+        <h2>Mis partidos {joinedEvents.length > 0 && `(${joinedEvents.length})`}{visibleWaitlist.length > 0 && ` · ${visibleWaitlist.length} en espera`}</h2>
         {onClose && (
           <button type="button" className="panel-close-btn" onClick={onClose} aria-label="Cerrar">
             <FiX aria-hidden="true" />
@@ -266,13 +271,13 @@ export function JoinedPanel({ joinedEvents, waitlistEvents = [], onCancel, onLea
             })}
           </ul>
         )}
-        {waitlistEvents.length > 0 && (
+        {visibleWaitlist.length > 0 && (
           <div className="waitlist-section">
             <p className="waitlist-section-title">
               <FiClock aria-hidden="true" /> Lista de espera
             </p>
             <ul className="waitlist-list">
-              {waitlistEvents.map((event) => {
+              {visibleWaitlist.map((event) => {
                 const SportIcon = sportIcons[event.sport] ?? sportIcons['Futbol 7']
                 return (
                   <li key={event.id} className="waitlist-item">

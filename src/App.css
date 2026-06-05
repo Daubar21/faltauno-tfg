@@ -288,6 +288,7 @@
   display: grid;
   align-content: start;
   gap: 16px;
+  overflow: hidden;
 }
 
 .auth-card {
@@ -306,6 +307,7 @@
   font-size: clamp(1.75rem, 3.8vw, 2.75rem);
   line-height: 1.1;
   font-family: 'Outfit', sans-serif;
+  overflow-wrap: break-word;
   background: linear-gradient(135deg, var(--text-900) 20%, var(--accent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -361,6 +363,8 @@
   grid-template-areas: 'a b' 'a c';
   gap: 10px;
   min-height: 280px;
+  overflow: hidden;
+  border-radius: var(--r-md);
 }
 
 .gallery-photo {
@@ -2291,9 +2295,9 @@ button.panel-section-title .toggle-arrow { font-size: 0.6rem; }
   .welcome-story { padding: 18px; }
   /* Muestra el formulario de acceso antes del contenido de marketing en móvil */
   .auth-card { order: -1; padding: 22px 18px; border-radius: var(--r-xl); }
-  /* Limita la altura de la galería para que no ocupe demasiado espacio */
-  .welcome-gallery { min-height: 130px; max-height: 180px; }
-  .gallery-photo { max-height: 180px; }
+  /* Altura fija en móvil — suficiente para las 3 fotos (cada foto derecha ~115px) */
+  .welcome-gallery { height: 240px; min-height: unset; max-height: unset; grid-template-rows: 1fr 1fr; }
+  .gallery-photo { max-height: unset; }
   .welcome-stats { grid-template-columns: repeat(3, 1fr); }
   .auth-points li { padding: 7px 10px; font-size: 0.84rem; }
 
@@ -2459,7 +2463,7 @@ button.panel-section-title .toggle-arrow { font-size: 0.6rem; }
   .icon-btn { width: 34px; height: 34px; font-size: 0.85rem; }
   .top-actions { gap: 2px; }
   .event-card { min-height: 470px; }
-  .welcome-gallery { max-height: 150px; min-height: 110px; }
+  .welcome-gallery { height: 190px; }
   .card-media { height: 45%; }
   .view-tab { font-size: 0.78rem; padding: 7px 10px; }
   .bottom-nav-btn { padding: 6px 10px; }
@@ -3167,6 +3171,8 @@ button.panel-section-title .toggle-arrow { font-size: 0.6rem; }
   gap: 6px;
   align-items: center;
 }
+
+.ce-time-selects select { width: 64px; text-align: center; }
 
 .ce-address-row input {
   flex: 1;

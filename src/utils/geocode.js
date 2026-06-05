@@ -4,10 +4,18 @@
 // Se restringe la búsqueda a España (countrycodes=es) y se responden en español.
 const BASE = 'https://nominatim.openstreetmap.org'
 const HEADERS = { 'Accept-Language': 'es', 'User-Agent': 'FaltaUnoApp/1.0 (TFG)' }
+const TIMEOUT_MS = 8000
+
+function fetchWithTimeout(url, options = {}) {
+  const controller = new AbortController()
+  const id = setTimeout(() => controller.abort(), TIMEOUT_MS)
+  return fetch(url, { ...options, signal: controller.signal })
+    .finally(() => clearTimeout(id))
+}
 
 export async function geocodeAddress(query) {
   const url = `${BASE}/search?q=${encodeURIComponent(query)}&format=json&limit=1&countrycodes=es`
-  const res = await fetch(url, { headers: HEADERS })
+  const res = await fetchWithTimeout(url, { headers: HEADERS })
   if (!res.ok) throw new Error('Error de red al buscar la dirección')
   const data = await res.json()
   if (!data.length) return null
@@ -20,7 +28,7 @@ export async function geocodeAddress(query) {
 
 export async function reverseGeocode(lat, lng) {
   const url = `${BASE}/reverse?lat=${lat}&lon=${lng}&format=json`
-  const res = await fetch(url, { headers: HEADERS })
+  const res = await fetchWithTimeout(url, { headers: HEADERS })
   if (!res.ok) throw new Error('Error de red al obtener la dirección')
   const data = await res.json()
   if (data.error) return null

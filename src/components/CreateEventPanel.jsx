@@ -10,6 +10,8 @@ import { createUserEvent } from '../services/eventsService'
 import { geocodeAddress, reverseGeocode } from '../utils/geocode'
 
 const SPORT_NAMES = Object.keys(sportIcons)
+const HOURS   = Array.from({ length: 24 }, (_, i) => String(i).padStart(2, '0'))
+const MINUTES = ['00', '05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55']
 
 function todayStr() {
   return new Date().toISOString().split('T')[0]
@@ -111,11 +113,19 @@ export function CreateEventPanel({ userId, isAdmin, onClose, onCreated }) {
       toast.error('La fecha es obligatoria')
       return
     }
-    const today = new Date()
-    today.setHours(0, 0, 0, 0)
-    if (new Date(form.eventDate + 'T00:00:00') < today) {
+    const now = new Date()
+    const todayMidnight = new Date(now)
+    todayMidnight.setHours(0, 0, 0, 0)
+    if (new Date(form.eventDate + 'T00:00:00') < todayMidnight) {
       toast.error('La fecha debe ser hoy o posterior')
       return
+    }
+    if (form.eventTime) {
+      const eventDt = new Date(`${form.eventDate}T${form.eventTime}:00`)
+      if (eventDt <= now) {
+        toast.error('La hora del evento no puede ser en el pasado')
+        return
+      }
     }
     if (!form.lat || !form.lng) {
       toast.error('Confirma la ubicación usando el botón de búsqueda 🔍')
@@ -212,13 +222,50 @@ export function CreateEventPanel({ userId, isAdmin, onClose, onCreated }) {
               />
             </div>
             <div>
-              <label htmlFor="ce-time">Hora</label>
-              <input
-                id="ce-time"
-                type="time"
-                value={form.eventTime}
-                onChange={(e) => set('eventTime', e.target.value)}
-              />
+              <label htmlFor="ce-time-h">Hora</label>
+              {(() => {
+                const isToday = form.eventDate === todayStr()
+                const nowH = new Date().getHours()
+                const nowM = new Date().getMinutes()
+                const selH = form.eventTime ? form.eventTime.split(':')[0] : ''
+                const selM = form.eventTime ? form.eventTime.split(':')[1] : ''
+                return (
+                  <div className="ce-time-selects" style={{ display: 'flex', gap: 4 }}>
+                    <select
+                      id="ce-time-h"
+                      value={selH}
+                      onChange={(e) => {
+                        const h = e.target.value
+                        const m = selM || '00'
+                        set('eventTime', h ? `${h}:${m}` : '')
+                      }}
+                    >
+                      <option value="">--</option>
+                      {HOURS.map((h) => (
+                        <option key={h} value={h} disabled={isToday && Number(h) < nowH}>
+                          {h}
+                        </option>
+                      ))}
+                    </select>
+                    <select
+                      aria-label="Minutos"
+                      value={selM}
+                      onChange={(e) => {
+                        const m = e.target.value
+                        const h = selH || '00'
+                        set('eventTime', m ? `${h}:${m}` : '')
+                      }}
+                    >
+                      <option value="">--</option>
+                      {MINUTES.map((m) => (
+                        <option key={m} value={m} disabled={isToday && Number(selH) === nowH && Number(m) <= nowM}>
+                          {m}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )
+              })()}
             </div>
           </div>
 
