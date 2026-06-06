@@ -1,5 +1,5 @@
 // Panel de filtros — permite al usuario ajustar deporte, nivel, fechas,
-// distancia, precio y preferencias de notificación.
+// distancia y precio.
 // Los cambios se propagan al padre y se guardan en Supabase al cerrar el panel.
 import { FiAward, FiCalendar, FiNavigation, FiX } from 'react-icons/fi'
 import { FILTER_GROUPS, levelIcons, levelOptions } from '../constants/sports'
@@ -135,35 +135,6 @@ export function FiltersPanel({ prefs, onPrefChange, onReset, onApply, onClose })
           value={prefs.maxPrice}
           onChange={(e) => onPrefChange('maxPrice', Number(e.target.value))}
         />
-
-        <p className="panel-section-title">Notificaciones</p>
-        <label className="inline-check" htmlFor="notif-reminders">
-          <input
-            id="notif-reminders"
-            type="checkbox"
-            checked={prefs.notifReminders}
-            onChange={(e) => onPrefChange('notifReminders', e.target.checked)}
-          />
-          Recordatorios de partido
-        </label>
-        <label className="inline-check" htmlFor="notif-status">
-          <input
-            id="notif-status"
-            type="checkbox"
-            checked={prefs.notifStatusUpdates}
-            onChange={(e) => onPrefChange('notifStatusUpdates', e.target.checked)}
-          />
-          Cambios de estado del evento
-        </label>
-        <label className="inline-check" htmlFor="notif-events">
-          <input
-            id="notif-events"
-            type="checkbox"
-            checked={prefs.notifNewEvents}
-            onChange={(e) => onPrefChange('notifNewEvents', e.target.checked)}
-          />
-          Nuevos eventos cercanos
-        </label>
 
         <div className="filter-actions">
           <button type="button" className="ghost-btn secondary" onClick={onReset}>
