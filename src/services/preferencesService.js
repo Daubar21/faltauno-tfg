@@ -14,9 +14,6 @@ export function savePreferences(userId, prefs) {
     max_days: prefs.maxDays,
     selected_sports: prefs.selectedSports,
     selected_levels: prefs.selectedLevels,
-    notif_reminders: prefs.notifReminders,
-    notif_status_updates: prefs.notifStatusUpdates,
-    notif_new_events: prefs.notifNewEvents,
     updated_at: new Date().toISOString(),
   })
 }

@@ -10,9 +10,6 @@ export const DEFAULT_PREFS = {
   maxDays: 30,
   selectedSports: [],
   selectedLevels: [],
-  notifReminders: true,
-  notifStatusUpdates: true,
-  notifNewEvents: false,
 }
 
 export function usePreferences() {
@@ -27,9 +24,6 @@ export function usePreferences() {
         maxDays: data.max_days ?? 30,
         selectedSports: data.selected_sports ?? [],
         selectedLevels: data.selected_levels ?? [],
-        notifReminders: data.notif_reminders ?? true,
-        notifStatusUpdates: data.notif_status_updates ?? true,
-        notifNewEvents: data.notif_new_events ?? false,
       })
     }
   }
